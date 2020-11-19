@@ -31,8 +31,8 @@ router.get("/", async (req, res) => {
 // /v1/public/characters/{characterId}/comics  Fetches lists of comics filtered by a character id
 
 router.get("/character/:id", async (req, res) => {
-  const characterId = req.params;
-  //console.log(req.params);
+  const characterId = req.params.id;
+  console.log(typeof req.params.id);
 
   try {
     const response = await axios.get(
