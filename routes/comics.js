@@ -17,10 +17,12 @@ const hash = md5(ts + private_key + public_key);
 http://gateway.marvel.com/v1/public/comics?ts=1&apikey=1234&hash=ffd275c5130566a2916217b101f26150
  (the hash value is the md5 digest of 1abcd1234) */
 
+///v1/public/comics //Fetches lists of comics.
+
 router.get("/comics", async (req, res) => {
   try {
     const response = await axios.get(
-      `http://gateway.marvel.com/v1/public/comics?ts=${ts}&apikey=${public_key}&hash=${hash}`
+      `http://gateway.marvel.com/v1/public/comics?orderBy=title&limit=100&ts=${ts}&apikey=${public_key}&hash=${hash}`
     );
     res.status(200).json(response.data);
   } catch (error) {
