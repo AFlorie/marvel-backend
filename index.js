@@ -12,11 +12,11 @@ app.use(cors());
 
 console.log(process.env.PORT);
 
-const allCharacters = require("./routes/allCharacters");
-app.use(allCharacters);
+const characters = require("./routes/characters");
+app.use(characters);
 
-const allComics = require("./routes/allComics");
-app.use(allComics);
+const comics = require("./routes/comics");
+app.use(comics);
 
 app.all("*", (req, res) => {
   res.status(404).json({ error: "Page Not Found" });

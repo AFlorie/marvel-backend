@@ -20,12 +20,28 @@ http://gateway.marvel.com/v1/public/comics?ts=1&apikey=1234&hash=ffd275c5130566a
 router.get("/", async (req, res) => {
   try {
     const response = await axios.get(
-      `http://gateway.marvel.com/v1/public/characters?limit=100&ts=${ts}&apikey=${public_key}&hash=${hash}`
+      `http://gateway.marvel.com/v1/public/characters?orderBy=name&limit=20&ts=${ts}&apikey=${public_key}&hash=${hash}`
     );
     res.status(200).json(response.data);
   } catch (error) {
     res.status(400).json(error.message);
   }
+});
+
+// /v1/public/characters/{characterId}/comics  Fetches lists of comics filtered by a character id
+
+router.get("/character:id", async (req, res) => {
+  const characterId = req.params.id;
+  console.log(req.params.id);
+  res.send("ok");
+  // try {
+  //   const response = await axios.get(
+  //     `http://gateway.marvel.com/v1/public/characters?${characterId}/comics?ts=${ts}&apikey=${public_key}&hash=${hash}`
+  //   );
+  //   res.status(200).json(response.data);
+  // } catch (error) {
+  //   res.status(400).json(error.message);
+  // }
 });
 
 module.exports = router;
