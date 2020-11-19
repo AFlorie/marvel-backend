@@ -20,7 +20,7 @@ http://gateway.marvel.com/v1/public/comics?ts=1&apikey=1234&hash=ffd275c5130566a
 router.get("/", async (req, res) => {
   try {
     const response = await axios.get(
-      `http://gateway.marvel.com/v1/public/characters?ts=${ts}&apikey=${public_key}&hash=${hash}`
+      `http://gateway.marvel.com/v1/public/characters?limit=100&ts=${ts}&apikey=${public_key}&hash=${hash}`
     );
     res.status(200).json(response.data);
   } catch (error) {
