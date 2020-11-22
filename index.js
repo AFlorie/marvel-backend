@@ -10,7 +10,7 @@ app.use(formidable());
 app.use(helmet());
 app.use(cors());
 
-console.log(process.env.PORT);
+//console.log(process.env.PORT);
 
 const characters = require("./routes/characters");
 app.use(characters);

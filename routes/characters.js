@@ -18,9 +18,24 @@ http://gateway.marvel.com/v1/public/comics?ts=1&apikey=1234&hash=ffd275c5130566a
  (the hash value is the md5 digest of 1abcd1234) */
 
 router.get("/", async (req, res) => {
+  //console.log(req.query.limit);
+
+  const name = req.query.name;
+
+  const limit = req.query.limit;
+  const page = req.query.page;
+
+  let search = "";
+
+  if (name && name !== "") {
+    search = `&nameStartsWith=${name}`;
+  }
+
+  const offset = page * limit - limit;
+
   try {
     const response = await axios.get(
-      `http://gateway.marvel.com/v1/public/characters?orderBy=name&limit=100&ts=${ts}&apikey=${public_key}&hash=${hash}`
+      `http://gateway.marvel.com/v1/public/characters?orderBy=name&limit=${limit}&offset=${offset}&ts=${ts}&apikey=${public_key}&hash=${hash}${search}`
     );
     res.status(200).json(response.data);
   } catch (error) {

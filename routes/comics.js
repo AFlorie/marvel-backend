@@ -20,9 +20,13 @@ http://gateway.marvel.com/v1/public/comics?ts=1&apikey=1234&hash=ffd275c5130566a
 ///v1/public/comics //Fetches lists of comics.
 
 router.get("/comics", async (req, res) => {
+  const limit = req.query.limit;
+  const page = req.query.page;
+  const offset = page * limit - limit;
+
   try {
     const response = await axios.get(
-      `http://gateway.marvel.com/v1/public/comics?orderBy=title&limit=100&ts=${ts}&apikey=${public_key}&hash=${hash}`
+      `http://gateway.marvel.com/v1/public/comics?orderBy=title&limit=${limit}&offset=${offset}&ts=${ts}&apikey=${public_key}&hash=${hash}`
     );
     res.status(200).json(response.data);
   } catch (error) {
